@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}My Certificates{% endblock %}
+
+{% block content %}
+
+<section class="vh-100" style="background-color: rgb(190, 106, 106);">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-12 col-xl-10">
+  
+          <div class="card">
+            <div class="card-header p-3">
+              <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>My Certificates</h5>
+            </div>
+            <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
+  
+              <table class="table mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">Course</th>
+                    <th scope="col">Date Issued</th>
+                    <th scope="col">Expiry</th>
+                    <th scope="col">Reissued Date</th>
+                    <th scope="col">Total Credits</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for certificate in certificates %}
+                  <tr class="fw-normal">
+                    <th>
+                      <a href="{% url 'students:pdf_certificate' certificate.id %}"<span class="ms-2">{{certificate.course}}</span>></a>
+                    </th>
+                    <td class="align-middle">
+                      <span >{{certificate.created_at}}</span >
+                    </td>
+                    <td class="align-middle">
+                      <h6 class="mb-0"><span class="badge bg-danger">{{certificate.expiry}}</span></h6>
+                    </td>
+                    <td class="align-middle">
+                      <span >{{certificate.reissued_date}}</span >
+                    </td>
+                    <td class="align-middle">
+                     <span>{{certificate.course.total_hours}}</span>
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <li>No Certificates yet.</li>
+                    {% endfor %}
+
+                    {% for certificate in expired_certificates %}
+                    <tr class="fw-normal">
+                      <th>
+                        <a href=""<span class="ms-2">{{certificate.course}}</span>></a>
+                      </th>
+                      <td class="align-middle">
+                        <span >{{certificate.created_at}}</span >
+                      </td>
+                      <td class="align-middle">
+                        <h6 class="mb-0"><span class="badge bg-danger">expired</span> <a href="{% url 'students:credit_application' %}"><span class="badge bg-danger">apply</span></a></h6>
+                      </td>
+                      <td class="align-middle">
+                        <span >{{certificate.reissued_date}}</span >
+                      </td>
+                      <td class="align-middle">
+                       <span>{{certificate.course.total_hours}}</span>
+                      </td>
+                    </tr>
+                    
+                      {% endfor %}
+                  
+                </tbody>
+              </table>
+  
+            </div>
+            
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

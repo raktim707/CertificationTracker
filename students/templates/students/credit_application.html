@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}My courses{% endblock %}
+
+{% block content %}
+
+
+<div class="form-body">
+  <div class='row'>
+  <div class="form-holder">
+  <div class="form-content">
+    <div class="form-items">
+  <h2 style="text-align: center">
+    Credit Application Form
+  </h2>
+    <p>Enter the details to apply for credits:</p>
+
+    <form method="post">
+      {{ form.as_p }}
+      {% csrf_token %}
+      <p><input type="submit" value="Apply"></p>
+    </form>
+
+</div>
+</div>
+</div>
+  </div>
+  </div>
+  <script>
+    $('#id_organizer').change(function){
+      var selection = $(#id_organizer).val();
+      console.log(selection);
+    }
+  </script>
+{% endblock %}

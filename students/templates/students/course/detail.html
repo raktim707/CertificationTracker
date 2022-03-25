@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load cache %}
+
+{% block title %}
+  {{ object.title }}
+{% endblock %}
+
+{% block content %}
+  <h3 style="margin: 4px 0 20px 4px;">
+    Credit/Point Table of {{ course }}
+  </h3>
+  <div class="table-responsive">
+      <table class="table table-hover table-dark table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Activity</th>
+            <th scope="col">Organization Name</th>
+            <th scope="col">Date Range</th>
+            <th scope="col">Total Hours</th>
+            <th scope="col">Approved Date</th>
+            <th scope="col">Points Approved</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          {% for credit in credits %}
+          <tr>
+            <th scope="row">{{credit.activity}}</th>
+            <td>{{credit.organizer}}</td>
+            <td>{{credit.program_start_date}}-{{credit.program_end_date}}</td>
+            <td>{{credit.hours}}</td>
+            <td>{{credit.approved_date}} </td>
+            <td>{{credit.hours}}</td>
+          </tr>
+          {% empty %}
+        <li>No Credits yet.</li>
+      {% endfor %}
+      {% for assignment in assignments %}
+          <tr>
+            <th scope="row">Assignment</th>
+            <td>{{assignment.course.organizer}}</td>
+            <td>{{assignment.course.start_date}}-{{assignment.course.end_date}}</td>
+            <td>{{assignment.point}}</td>
+            <td>{{assignment.approved_date}} </td>
+            <td>{{assignment.point}}</td>
+          </tr>
+      {% endfor %}
+      <tr>
+        <td colspan="5">Total Credits earned</td>
+        <td>{{total_credits}}</td>
+      </tr>
+        </tbody>
+      </table>
+      
+  </div>
+  <div class="module">
+    {% cache 600 module_contents module %}
+      {% for content in module.contents.all %}
+          {% with item=content.item %}
+              <h2>{{ item.title }}</h2>
+              {{ item.render }}
+              {% endwith %}
+      {% endfor %}
+    {% endcache %}
+  </div>
+  {% endblock %}

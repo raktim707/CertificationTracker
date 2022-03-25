@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <style type='text/css'>
+            body, html {
+                margin: 0 ;
+                padding: 0 0 0px 0;
+            }
+            body {
+                color: black;
+                display: table;
+                font-family: Georgia, serif;
+                font-size: 24px;
+                text-align: center;
+            }
+            .container {
+                border: 20px solid tan;
+                width: 610px;
+                height: 463px;
+                display: table-cell;
+                vertical-align: middle;
+            }
+            .logo {
+                color: tan;
+            }
+
+            .marquee {
+                color: tan;
+                font-size: 48px;
+                margin: 20px;
+            }
+            .assignment {
+                margin: 20px;
+            }
+            .person {
+                border-bottom: 2px solid black;
+                font-size: 32px;
+                font-style: italic;
+                margin: 20px auto;
+                width: 400px;
+            }
+            .reason {
+                margin: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="logo">
+                {{certificate.course}}
+            </div>
+
+            <div class="marquee">
+                Certificate of Completion
+            </div>
+
+            <div class="assignment">
+                This certificate is presented to
+            </div>
+
+            <div class="person">
+                {{certificate.students.first_name}} {{certificate.students.last_name}}
+            </div>
+
+            <div class="reason">
+                For successfully completing Graphics Design course
+                <span>of {{certificate.course.total_hours}} credits</span>
+            </div>
+            <div class="col-md-4" style="float: center; font-size:xx-small">
+                <p>expiry: {{certificate.expiry}}</p>
+            </div>
+        </div>
+    </body>
+</html>

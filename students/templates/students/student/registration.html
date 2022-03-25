@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Sign up
+{% endblock %}
+
+{% block content %}
+<div class="container col-lg-8">
+  <h1>
+    Sign up
+  </h1>
+  <div class="form-body">
+  <div class="form-holder">
+    <div class="form-content">
+      <div class="form-items">
+    <p>Enter your details to create an account:</p>
+    <form method="post" style="color: rgb(17, 56, 7)">
+      {{ form.as_p }}
+      {% csrf_token %}
+      <p><input type="submit" value="Create my account"></p>
+    </form>
+    </div>
+  </div>
+  </div>
+  </div>
+</div>
+{% endblock %}

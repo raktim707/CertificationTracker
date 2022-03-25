@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}My courses{% endblock %}
+
+{% block content %}
+
+{% if query %}
+
+<h3 style="padding-top: 20px;">All courses containing "{{query}}"</h3>
+{% for course in courses %}
+
+<li>
+<h4><a href="{% url 'students:course_detail' pk=course.pk %}">{{ course.title }}</a></h4>
+{% empty %}
+<p>There are no courses for your query.</p>
+</li>
+
+{% endfor %}
+{% if certificates %}
+<h3>All certificates </h3>
+{% for certificate in certificates %}
+<div class="breadcrumb">
+
+<h4><a href="{% url 'students:my_certificates' %}">{{certificate.course}}</a></h4>
+
+</div>
+{% endfor %}
+{% endif %}
+{% endif %}
+
+</div>
+
+{% endblock %}
